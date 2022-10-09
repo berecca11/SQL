@@ -1,0 +1,21 @@
+--Create a clothing store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER, season TEXT);
+
+INSERT INTO store VALUES (1, 'shirt', 5, 10, 'summer');
+INSERT INTO store VALUES (2, 'shorts', 3,  12, 'summer');
+INSERT INTO store VALUES (3, 'pants', 2, 20, 'winter');
+INSERT INTO store VALUES (4, 'sweater', 4, 18, 'fall');
+INSERT INTO store VALUES (5,  'coat', 3, 25, 'winter');
+INSERT INTO store VALUES (6, 'jacket', 2, 23, 'fall');
+
+--display the databse by price
+SELECT * FROM store
+WHERE price >=15
+ORDER BY price desc;
+
+--What is the sum of all items in the store?
+SELECT SUM (quantity) from store;
+
+--What is the average price of items in the store?
+SELECT AVG (price) from store;
