@@ -8,15 +8,15 @@ INSERT INTO movie_stars (name, age) VALUES ("Jennifer Lopez", 55);
 INSERT INTO movie_stars (name, age) VALUES ("Mila Kunis", 41);
 INSERT INTO movie_stars (name, age) VALUES ("Ashton Kutcher", 45);
 
-CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, star_id INTEGER, title TEXT, year INTEGER);
-INSERT INTO movies (star_id, title, year) VALUES (1, "Batman", 1995);
-INSERT INTO movies (star_id, title, year) VALUES (2, "Batman", 2008);
-INSERT INTO movies (star_id, title, year) VALUES (3, "Batman", 2022);
-INSERT INTO movies (star_id, title, year) VALUES (4, "Pretty Woman", 1990);
-INSERT INTO movies (star_id, title, year) VALUES (5, "Batman", 2018);
-INSERT INTO movies (star_id, title, year) VALUES (6, "Hustlers", 2019);
-INSERT INTO movies (star_id, title, year) VALUES (7, "Luckiest Girl Alive", 2022);
-INSERT INTO movies (star_id, title, year) VALUES (8, "Just Married", 2003);
+CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, star_id INTEGER, title TEXT, year INTEGER, rotten_tomatoes_score INTEGER);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (1, "Batman", 1995, 39);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (2, "Batman Begins", 2008, 84);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (3, "The Batman", 2022, 85);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (4, "Pretty Woman", 1990, 65);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (5, "Batman V Superman", 2016, 29);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (6, "Hustlers", 2019, 87);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (7, "Luckiest Girl Alive", 2022, 44);
+INSERT INTO movies (star_id, title, year, rotten_tomatoes_score) VALUES (8, "Just Married", 2003, 20);
 
 CREATE table married (id INTEGER PRIMARY KEY, star1_id INTEGER, star2_id INTEGER);
 INSERT INTO married (star1_id, star2_id)
@@ -30,13 +30,13 @@ FROM movie_stars s
 JOIN movies m 
 ON s.id = m.star_id;
 
---Who is the "Batman"? Selecting the names of the movie stars and the year that they starred in "Batman".
-SELECT s.name AS movie_star, m. title AS movie_title, m.year AS movie_year 
+--Who is the "Batman"? Selecting the names of the movie stars and the year that they starred in a "Batman" movie.
+SELECT s.name AS movie_star, m.title AS movie_title, m.year AS movie_year, m.rotten_tomatoes_score 
 FROM movie_stars s 
 JOIN movies m 
 ON s.id = m.star_id 
-WHERE m.title = "Batman" 
-ORDER BY m.year asc;
+WHERE m.title LIKE "%Batman%" 
+ORDER BY m.rotten_tomatoes_score desc;
 
 -- Are they married? Selecting the names of the movie stars and their movie star spouses.
 SELECT a.name AS movie_star, b.name AS spouse 
