@@ -1,0 +1,47 @@
+CREATE TABLE movie_stars (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER);
+INSERT INTO movie_stars (name, age) VALUES ("Val Kilmer", 65);
+INSERT INTO movie_stars (name, age) VALUES ("Christian Bale", 51);
+INSERT INTO movie_stars (name, age) VALUES ("Robert Pattinson", 40);
+INSERT INTO movie_stars (name, age) VALUES ("Julia Roberts", 58);
+INSERT INTO movie_stars (name, age) VALUES ("Ben Affleck", 59);
+INSERT INTO movie_stars (name, age) VALUES ("Jennifer Lopez", 55);
+INSERT INTO movie_stars (name, age) VALUES ("Mila Kunis", 41);
+INSERT INTO movie_stars (name, age) VALUES ("Ashton Kutcher", 45);
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, star_id INTEGER, title TEXT, year INTEGER);
+INSERT INTO movies (star_id, title, year) VALUES (1, "Batman", 1995);
+INSERT INTO movies (star_id, title, year) VALUES (2, "Batman", 2008);
+INSERT INTO movies (star_id, title, year) VALUES (3, "Batman", 2022);
+INSERT INTO movies (star_id, title, year) VALUES (4, "Pretty Woman", 1990);
+INSERT INTO movies (star_id, title, year) VALUES (5, "Batman", 2018);
+INSERT INTO movies (star_id, title, year) VALUES (6, "Hustlers", 2019);
+INSERT INTO movies (star_id, title, year) VALUES (7, "Luckiest Girl Alive", 2022);
+INSERT INTO movies (star_id, title, year) VALUES (8, "Just Married", 2003);
+
+CREATE table married (id INTEGER PRIMARY KEY, star1_id INTEGER, star2_id INTEGER);
+INSERT INTO married (star1_id, star2_id)
+    VALUES (5, 6);
+INSERT INTO married (star1_id, star2_id)
+    VALUES (7, 8);
+    
+--What movies do they star in? Selecting  movie stars based on their name, the movie they were in and the year the movie was released.    
+SELECT s.name AS movie_star, m.title AS movie_title, m.year AS movie_year 
+FROM movie_stars s 
+JOIN movies m 
+ON s.id = m.star_id;
+
+--Who is the "Batman"? Selecting the names of the movie stars and the year that they starred in "Batman".
+SELECT s.name AS movie_star, m. title AS movie_title, m.year AS movie_year 
+FROM movie_stars s 
+JOIN movies m 
+ON s.id = m.star_id 
+WHERE m.title = "Batman" 
+ORDER BY m.year asc;
+
+-- Are they married? Selecting the names of the movie stars and their movie star spouses.
+SELECT a.name AS movie_star, b.name AS spouse 
+FROM married 
+JOIN movie_stars a 
+ON a.id = married.star1_id 
+JOIN movie_stars b 
+ON b.id = married.star2_id;
