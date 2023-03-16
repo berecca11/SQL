@@ -1,3 +1,5 @@
+--In this SQL code, I'm querying a database that's holding Movie Star's data to answer questions about the data.
+
 CREATE TABLE movie_stars (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER);
 INSERT INTO movie_stars (name, age) VALUES ("Val Kilmer", 65);
 INSERT INTO movie_stars (name, age) VALUES ("Christian Bale", 51);
